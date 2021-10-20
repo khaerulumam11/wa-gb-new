@@ -1,0 +1,4 @@
+include ':nativetemplates'
+include ':appintro'
+include ':app', ':library'
+rootProject.name='Frames'

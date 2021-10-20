@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <!--<string name="admob_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_banner">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_native">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="admob_reward">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="admob_intersitial">ca-app-pub-3940256099942544/1033173712</string>-->
+    <string name="admob_id">ca-app-pub-5132475095382126~9127915678</string>
+    <string name="admob_banner">ca-app-pub-5132475095382126/3684017301</string>
+    <string name="admob_native">ca-app-pub-5132475095382126/5669932687</string>
+    <string name="admob_reward">ca-app-pub-5132475095382126/6930209319</string>
+    <string name="admob_intersitial">ca-app-pub-5132475095382126/8185728463</string>
+    <string name="admob_publisher_id">pub-5132475095382126</string>
+    <string name="app_name">Wallpaper and Theme Premium</string>
+    <string name="license_valid_snack">@string/license_valid_content</string>
+
+    <string name="unity_app_id" translatable="false">4141981</string>
+    <string name="unity_banner" translatable="false">Banner_Android</string>
+    <string name="unity_inter" translatable="false">Interstitial_Android</string>
+    <string name="unity_reward" translatable="false">Rewarded_Android</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

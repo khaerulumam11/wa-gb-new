@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ThemesFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextStyle.Frames"
+                android:text="Pasang tema untuk WA Kamu. Pasang ratusan tema dan fitur-fitur WA keren yang dapat kamu pakai"
+                android:layout_marginBottom="15dp"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Unduh"
+                android:id="@+id/unduh"
+                style="@style/Widget.Frames.SurfaceButton"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cara Unduh"
+                android:id="@+id/cara_unduh"
+                style="@style/Widget.Frames.SurfaceButton"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cara Pasang"
+                android:id="@+id/cara_pasang"
+                style="@style/Widget.Frames.SurfaceButton"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/video_panduan"
+                android:text="Video Panduan"
+                style="@style/Widget.Frames.SurfaceButton"
+                android:layout_marginBottom="10dp"
+                />
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/my_template"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:gnt_template_type="@layout/gnt_small_template_view" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UnduhFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?colorPrimary"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/text_title"
+                style="@style/Base.TextAppearance.AppCompat.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center_horizontal"
+                android:linksClickable="true"
+                android:padding="10dp"
+                android:text="Unduh Tema-WA" />
+
+
+            <TextView
+                style="@style/TextStyle.Frames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="Selangkah lagi Anda akan memasang GBWA agar tampilan dan temanya dapat di kustom sendiri. Klik tombol Un d u h dibawah ini" />
+
+            <Button
+                android:id="@+id/unduh"
+                style="@style/Widget.Frames.SurfaceButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="Un d u h" />
+
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/my_template"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:gnt_template_type="@layout/gnt_medium_template_view" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>
