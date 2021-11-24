@@ -6,10 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ThemesFragment">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
         <LinearLayout
             android:padding="10dp"
             android:layout_width="match_parent"
@@ -51,12 +47,13 @@
                 style="@style/Widget.Frames.SurfaceButton"
                 android:layout_marginBottom="10dp"
                 />
+
             <com.google.android.ads.nativetemplates.TemplateView
                 android:id="@+id/my_template"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:gnt_template_type="@layout/gnt_small_template_view" />
         </LinearLayout>
-    </RelativeLayout>
+
 
 </FrameLayout>

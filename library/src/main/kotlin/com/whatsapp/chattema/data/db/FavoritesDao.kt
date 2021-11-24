@@ -9,7 +9,7 @@ import com.whatsapp.chattema.data.models.Favorite
 
 @Dao // Data Access Object
 interface FavoritesDao {
-    @Query("select * from favorites")
+    @Query("select * from favorite")
     fun getAllFavorites(): List<Favorite>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -22,9 +22,9 @@ interface FavoritesDao {
     @Delete
     fun delete(favorite: Favorite)
 
-    @Query("delete from favorites where url = :url")
+    @Query("delete from favorite where url = :url")
     fun deleteByUrl(url: String)
 
-    @Query("delete from favorites")
+    @Query("delete from favorite")
     fun nuke()
 }

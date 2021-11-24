@@ -69,7 +69,7 @@ android {
 
     buildTypes {
         release {
-            debuggable false
+            debuggable true
             zipAlignEnabled true
             minifyEnabled true
             shrinkResources false

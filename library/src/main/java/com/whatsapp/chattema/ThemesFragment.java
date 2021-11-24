@@ -58,7 +58,7 @@ public class ThemesFragment extends Fragment {
         mVideoPanduanButton.setOnClickListener(view -> startActivity(new Intent(getActivity(), PanduanActivity.class)));
 
         AdLoader adLoader = new AdLoader.Builder(getContext(), getContext().getString(R.string.admob_native))
-                .forUnifiedNativeAd(unifiedNativeAd -> {
+                .forNativeAd(unifiedNativeAd -> {
                     NativeTemplateStyle styles = new
                             NativeTemplateStyle.Builder().build();
 

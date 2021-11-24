@@ -4,7 +4,7 @@ import android.Manifest
 import androidx.annotation.IdRes
 import com.fondesa.kpermissions.PermissionStatus
 import com.fondesa.kpermissions.extension.permissionsBuilder
-import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.material.snackbar.Snackbar
 import com.whatsapp.chattema.R
 import com.whatsapp.chattema.data.Preferences

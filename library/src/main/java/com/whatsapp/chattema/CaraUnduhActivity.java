@@ -1,5 +1,6 @@
 package com.whatsapp.chattema;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -11,8 +12,9 @@ import com.github.paolorotolo.appintro.AppIntro2;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.unity3d.ads.IUnityAdsListener;
 import com.unity3d.ads.UnityAds;
 import com.unity3d.services.banners.IUnityBannerListener;
@@ -154,8 +156,8 @@ public class CaraUnduhActivity extends AppIntro2 {
         super.onSlideChanged(oldFragment, newFragment);
         fragmentSeq += 1;
         if(fragmentSeq % seq == 0){
-            if (mInterstitialAd.isLoaded()) {
-                mInterstitialAd.show();
+            if (mInterstitialAd!=null) {
+                mInterstitialAd.show(this);
                 loadInter();
             }else {
                 if (UnityAds.isReady(getString(R.string.unity_inter))) {
@@ -168,21 +170,21 @@ public class CaraUnduhActivity extends AppIntro2 {
 
 
     void loadInter() {
-        mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.admob_intersitial));
-        mInterstitialAd.loadAd(new Utils().getAdsRequest(this));
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdFailedToLoad(LoadAdError loadAdError) {
-                super.onAdFailedToLoad(loadAdError);
-            }
+        InterstitialAd.load(this,getString(R.string.admob_intersitial), new Utils().getAdsRequest(this),
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+                    }
 
-            @Override
-            public void onAdClosed() {
-                // mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-
-        });
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+                        mInterstitialAd = null;
+                    }
+                });
         if (UnityAds.isReady(getString(R.string.unity_inter))) {
             UnityAds.show(this, getString(R.string.unity_inter));
         }

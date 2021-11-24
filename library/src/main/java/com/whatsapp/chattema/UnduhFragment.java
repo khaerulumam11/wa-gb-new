@@ -21,9 +21,9 @@ import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdLoader;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
 import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
-import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.unity3d.ads.UnityAds;
@@ -63,7 +63,7 @@ public class UnduhFragment extends Fragment {
         loadReward();
 
         AdLoader adLoader = new AdLoader.Builder(getContext(), getContext().getString(R.string.admob_native))
-                .forUnifiedNativeAd(unifiedNativeAd -> {
+                .forNativeAd(unifiedNativeAd -> {
                     NativeTemplateStyle styles = new
                             NativeTemplateStyle.Builder().build();
 
@@ -89,15 +89,17 @@ public class UnduhFragment extends Fragment {
     }
 
     private void showReward(){
-        if (rewardedAd.isLoaded()) {
-            RewardedAdCallback adCallback = new RewardedAdCallback() {
+        if (rewardedAd!=null) {
+            OnUserEarnedRewardListener onUserEarnedRewardListener = new OnUserEarnedRewardListener() {
                 @Override
-                public void onRewardedAdOpened() {
-                    // Ad opened.
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    isEarned = true;
                 }
-
+            };
+            RewardedAdLoadCallback rewardedAdLoadCallback = new RewardedAdLoadCallback() {
                 @Override
-                public void onRewardedAdClosed() {
+                public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                    super.onAdLoaded(rewardedAd);
                     if(!isEarned) {
                         Toast.makeText(getContext(), "Tonton video sampai selesai untuk mengun d u h tema", Toast.LENGTH_LONG).show();
                     }else {
@@ -109,16 +111,11 @@ public class UnduhFragment extends Fragment {
                 }
 
                 @Override
-                public void onUserEarnedReward(@NonNull RewardItem reward) {
-                    isEarned = true;
-                }
-
-                @Override
-                public void onRewardedAdFailedToShow(AdError adError) {
-                    // Ad failed to display.
+                public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                    super.onAdFailedToLoad(loadAdError);
                 }
             };
-            rewardedAd.show(getActivity(), adCallback);
+            rewardedAd.show(requireActivity(), onUserEarnedRewardListener);
         } else {
 
             tryToOpen += 1;
@@ -159,19 +156,19 @@ public class UnduhFragment extends Fragment {
     }
 
     private void loadReward() {
-        rewardedAd = new RewardedAd(getContext(), getContext().getString(R.string.admob_reward));
-        RewardedAdLoadCallback adLoadCallback = new RewardedAdLoadCallback() {
+       RewardedAd.load(getContext(), getContext().getString(R.string.admob_reward), new AdRequest.Builder().build(),new RewardedAdLoadCallback(){
             @Override
-            public void onRewardedAdLoaded() {
-                // Ad successfully loaded.
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error.
+                rewardedAd = null;
             }
 
             @Override
-            public void onRewardedAdFailedToLoad(LoadAdError adError) {
-                // Ad failed to load.
+            public void onAdLoaded(@NonNull RewardedAd mRewardedAd) {
+                rewardedAd = mRewardedAd;
+//                Log.d(TAG, "Ad was loaded.");
             }
-        };
-        rewardedAd.loadAd(new AdRequest.Builder().build(), adLoadCallback);
+        });
 
         if (UnityAds.isReady (getString(R.string.unity_inter))) {
             UnityAds.show (requireActivity(), getString(R.string.unity_inter));

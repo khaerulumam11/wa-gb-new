@@ -4,11 +4,14 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.NonNull
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.work.WorkInfo
 import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.material.snackbar.Snackbar
 import com.whatsapp.chattema.R
 import com.whatsapp.chattema.Utils
@@ -21,11 +24,15 @@ import com.whatsapp.chattema.extensions.context.string
 import com.whatsapp.chattema.extensions.resources.getUri
 import com.whatsapp.chattema.extensions.views.snackbar
 import java.io.File
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+
+
+
 
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseWallpaperApplierActivity<out P : Preferences> :
     BaseWallpaperFetcherActivity<P>() {
-
+    var adRequest: AdRequest = AdRequest.Builder().build()
     fun startApplyThumb(applyOption: Int) {
         cancelWorkManagerTasks()
         val newApplyTask = WallpaperApplier.buildRequest(wallPaperThumbUrl, applyOption)
@@ -56,18 +63,19 @@ abstract class BaseWallpaperApplierActivity<out P : Preferences> :
 
     fun startApply(applyOption: Int) {
 
-        mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd!!.setAdUnitId(getString(R.string.admob_intersitial))
-        mInterstitialAd!!.loadAd(Utils().getAdsRequest(this))
-        mInterstitialAd!!.setAdListener(object : AdListener() {
-            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                super.onAdFailedToLoad(loadAdError)
-            }
+       InterstitialAd.load(this, getString(R.string.admob_intersitial), Utils().getAdsRequest(this),
+            object : InterstitialAdLoadCallback() {
+                override fun onAdLoaded(@NonNull interstitialAd: InterstitialAd) {
+                    // The mInterstitialAd reference will be null until
+                    // an ad is loaded.
+                    mInterstitialAd = interstitialAd
+                }
 
-            override fun onAdClosed() {
-                // mInterstitialAd.loadAd(new AdRequest.Builder().build());
-            }
-        })
+                override fun onAdFailedToLoad(@NonNull loadAdError: LoadAdError) {
+                    // Handle the error
+                    mInterstitialAd = null
+                }
+            })
 
         cancelWorkManagerTasks()
         val newApplyTask = WallpaperApplier.buildRequest(wallpaperDownloadUrl, applyOption)
@@ -111,9 +119,8 @@ abstract class BaseWallpaperApplierActivity<out P : Preferences> :
 
     private fun onWallpaperApplied() {
         try {
-
-            if (mInterstitialAd!!.isLoaded) {
-                mInterstitialAd!!.show()
+            if (mInterstitialAd!=null) {
+                mInterstitialAd!!.show(this)
             }
             currentSnackbar = snackbar(R.string.applying_applied, anchorViewId = snackbarAnchorId)
             Toast.makeText(this, R.string.applying_applied, Toast.LENGTH_LONG).show()

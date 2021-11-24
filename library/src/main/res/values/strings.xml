@@ -5,11 +5,11 @@
     <string name="admob_native">ca-app-pub-3940256099942544/2247696110</string>
     <string name="admob_reward">ca-app-pub-3940256099942544/5224354917</string>
     <string name="admob_intersitial">ca-app-pub-3940256099942544/1033173712</string>-->
-    <string name="admob_id">ca-app-pub-5132475095382126~9127915678</string>
-    <string name="admob_banner">ca-app-pub-5132475095382126/3684017301</string>
-    <string name="admob_native">ca-app-pub-5132475095382126/5669932687</string>
-    <string name="admob_reward">ca-app-pub-5132475095382126/6930209319</string>
-    <string name="admob_intersitial">ca-app-pub-5132475095382126/8185728463</string>
+    <string name="admob_id">ca-app-pub-1405596438680485~8822090117</string>
+    <string name="admob_banner">ca-app-pub-1405596438680485/9179320945</string>
+    <string name="admob_native">ca-app-pub-1405596438680485/3160707504</string>
+    <string name="admob_reward">ca-app-pub-1405596438680485/9468478445</string>
+    <string name="admob_intersitial">ca-app-pub-1405596438680485/7866239271</string>
     <string name="admob_publisher_id">pub-5132475095382126</string>
     <string name="app_name">Wallpaper and Theme Premium</string>
     <string name="license_valid_snack">@string/license_valid_content</string>
